@@ -165,7 +165,6 @@
     </div>
   </div>
 
-
   <div class="container-fluid mt-5 py-4 text-dark" style="background-color: #DF6B50;">
     <div class="container">
       <div class="row">
@@ -227,13 +226,23 @@
     birthdayInput.max = today;
 
     const getBirthdayAPOD = async () => {
-      if (!birthdayInput.value) return;
+      const selectedDate = birthdayInput.value;
+      if (!selectedDate) return;
 
+      if (selectedDate < MIN_DATE || selectedDate > MAX_DATE) {
+        alert("Please select a valid date between June 16, 1995 and today...");
+        return;
+      }
       const response = await fetch(
-        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + birthdayInput.value
+        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + selectedDate
       );
 
       const data = await response.json();
+
+      if (data.code) {
+        alert("Sorry, there is no APOD available for this date...");
+        return;
+      }
 
       birthdayTitle.innerHTML = data.title;
       birthdayDate.innerHTML = data.date;
@@ -243,13 +252,13 @@
         birthdayImage.src = data.url;
       }
 
-      birthdayResult.classList.remove("d-none");
-
       birthdayCredit.innerHTML = data.copyright
         ? `Image Credit & Copyright: ${data.copyright}`
         : "Image Credit: NASA / APOD";
 
+      birthdayResult.classList.remove("d-none");
     };
+
 
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
