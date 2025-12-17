@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bootstrap demo</title>
+  <title>NASA-APOD</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link
@@ -28,8 +28,7 @@
           <div class="navbar-nav ms-auto text-end justify-content-end gap-3 w-100 px-3">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             <a class="nav-link " href="#APOD">APOD</a>
-            <a class="nav-link " href="#birthdayInput">Birthday Picture</a>
-            <a class="nav-link " href="#gallery">Gallery</a>
+            <a class="nav-link " href="#birthdayForm">Birthday Picture</a>
           </div>
         </div>
       </div>
@@ -81,11 +80,10 @@
     <div class="container my-5 pt-5 text-center" id="APOD">
       <div class="row justify-content-center">
         <div class="col-10">
-          <div class="fw-bold"
-            style="font-size:clamp(1.8rem, 3vw, 3rem); font-variation-settings:'wght' 900; color: #DF6B50;">
+          <div class="fw-bold section-title">
             Astronomy Picture of the Day
           </div>
-          <div class="fst-italic mb-3" style="font-size:clamp(1rem, 1.2vw, 1.4rem);" id="todayDate">
+          <div class="fst-italic section-subtitle mb-3" id="todayDate">
           </div>
         </div>
       </div>
@@ -100,10 +98,10 @@
           </div>
           <div class="col-12 col-lg-10 text-center mx-auto">
             <div class="d-flex flex-column h-100">
-              <div class="mb-3" style="font-size:clamp(1.2rem,1.5vw,1.5rem); font-variation-settings:'wght' 700;"
+              <div class="mb-3 picture-title"
                 id="todayTitle">
               </div>
-              <div style="font-size:clamp(1rem, 1.2vw, 1.2rem); text-align:justify;" id="todayExplanation">
+              <div class="picture-explanation" id="todayExplanation">
               </div>
             </div>
           </div>
@@ -112,9 +110,9 @@
     </div>
   </div>
 
-  <div class="px-3 px-sm-4 py-5">
+  <div class="px-3 px-sm-4 py-5" id="birthdayForm">
     <div class="container col-11 col-md-8 col-lg-6 mx-auto rounded-4 shadow-lg py-5"
-      style="background: linear-gradient(180deg, #945243 0%, #2E1915 100%);" id="birthday-form">
+      style="background: linear-gradient(180deg, #945243 0%, #2E1915 100%);">
       <div class="row justify-content-center">
         <div class="col-11 col-md-10 text-center">
           <div class="h2 fw-bold text-light mb-4">
@@ -124,7 +122,7 @@
             Select your birthday
           </div>
           <input type="date" class="form-control form-control-lg mb-4 rounded-3" id="birthdayInput">
-          <div class="small text-warning mt-2 d-none" id="birthdayMessage"></div>
+          <div class="small text-warning my-3 d-none" id="birthdayMessage"></div>
           <button onclick="getBirthdayAPOD()" class="btn btn-lg px-4 text-light fw-bold"
             style=" font-size:clamp(1rem, 1.2vw, 1.2rem);background-color:#E5735A;">
             Show my space photo!
@@ -135,11 +133,10 @@
   </div>
 
   <div class="d-none" id="birthdayResult">
-    <div class="container text-center mt-5" id="birthdaypicture">
+    <div class="container text-center mt-5">
       <div class="row justify-content-center text-center">
         <div class="col-10 py-4">
-          <div class="fw-bold"
-            style="font-size:clamp(1.8rem, 3vw, 3rem); font-variation-settings:'wght' 900; color: #DF6B50;">
+          <div class="fw-bold section-title">
             Your Space Picture
           </div>
         </div>
@@ -155,15 +152,28 @@
         </div>
         <div class="col-10 text-center">
           <div class="d-flex flex-column h-100">
-            <div class="mb-1" style="font-size:clamp(1.2rem, 1.5vw, 1.5rem); font-variation-settings:'wght'700;"
-              id="birthdayTitle">
+            <div class="mb-1 picture-title" id="birthdayTitle">
             </div>
-            <div class="fst-italic mb-3" style="font-size:clamp(1rem, 1.2vw, 1.4rem);" id="birthdayDate"></div>
-            <div style="font-size:clamp(1rem, 1.2vw, 1.2rem); text-align:justify;" id="birthdayExplanation"></div>
+            <div class="fst-italic picture-date mb-3" id="birthdayDate"></div>
+            <div class="picture-explanation" id="birthdayExplanation"></div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="container my-4 d-none" id="gallery">
+    <div class="row px-1 px-lg-5 justify-content-center mb-3">
+      <div class="col-10">
+        <div class="fw-bold section-title">
+          Your Birth week Gallery
+        </div>
+        <div class="section-subtitle mb-3">
+          View other space photographs captured by NASA during the week of your birthday.
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" id="birthWeekGallery"></div>
   </div>
 
   <div class="container-fluid mt-5 py-4 text-dark" style="background-color: #DF6B50;">
@@ -221,6 +231,8 @@
     const birthdayCredit = document.getElementById("birthdayCredit");
     const birthdayResult = document.getElementById("birthdayResult");
     const birthdayMessage = document.getElementById("birthdayMessage");
+    const gallery = document.getElementById("gallery");
+    const birthWeekGallery = document.getElementById("birthWeekGallery");
 
     const MIN_DATE = "1995-06-16";
     const MAX_DATE = new Date().toISOString().split("T")[0];
@@ -228,21 +240,23 @@
     birthdayInput.min = MIN_DATE;
     birthdayInput.max = MAX_DATE;
 
-
     const getBirthdayAPOD = async () => {
-      const selectedDate = birthdayInput.value;
+      const selectedDateStr = birthdayInput.value;
+      if (!selectedDateStr) return;
+
+      const selectedDate = new Date(selectedDateStr);
       birthdayMessage.classList.add("d-none");
       birthdayMessage.innerText = "";
       if (!selectedDate) return;
 
-      if (selectedDate < MIN_DATE || selectedDate > MAX_DATE) {
+     if (selectedDateStr < MIN_DATE || selectedDateStr > MAX_DATE) {
         birthdayMessage.classList.remove("d-none");
         birthdayMessage.innerText =
           "Please select a valid date between June 16, 1995 and today...";
         return;
       }
       const response = await fetch(
-        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + selectedDate
+        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + selectedDateStr
       );
 
       const data = await response.json();
@@ -267,10 +281,55 @@
         : "Image Credit: NASA / APOD";
 
       birthdayResult.classList.remove("d-none");
+      gallery.classList.remove("d-none");
+      loadBirthWeekGallery(selectedDate);
     };
 
-
   </script>
+  <script>
+    const loadBirthWeekGallery = async (selectedDate) => {
+      birthWeekGallery.innerHTML = "";
+
+      const startDate = new Date(selectedDate);
+      startDate.setDate(startDate.getDate() - 3);
+
+      for (let i = 0; i < 7; i++) {
+        const currentDate = new Date(startDate);
+        currentDate.setDate(startDate.getDate() + i);
+
+        const formattedDate = currentDate.toISOString().split("T")[0];
+
+        const response = await fetch(
+          "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + formattedDate
+        );
+
+        const data = await response.json();
+
+        if (data.media_type !== "image") continue;
+        if (data.date === selectedDate.toISOString().split("T")[0]) continue;
+
+        birthWeekGallery.innerHTML += `
+      <div class="col-10 col-md-6 col-lg-4">
+        <div class="card p-3 rounded-4 my-4 text-center shadow-lg">
+          <div class="ratio ratio-16x9 rounded-3 overflow-hidden">
+            <img class="w-100 object-fit-cover" src="${data.url}">
+          </div>
+          <div class="h5 my-3">
+            ${data.title}
+          </div>
+          <div class="small fst-italic opacity-75">
+            ${data.date}
+          </div>
+          <div class="small fst-italic opacity-75">
+            ${data.copyright ? `Image Credit & Copyright: ${data.copyright}` : "Image Credit: NASA / APOD"}
+          </div>
+        </div>
+      </div>
+    `;
+      }
+    };
+  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
     crossorigin="anonymous"></script>

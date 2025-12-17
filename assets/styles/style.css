@@ -1,10 +1,35 @@
+body {
+    font-family: 'Rethink Sans', sans-serif;
+}
 
-    body {
-        font-family: 'Rethink Sans', sans-serif;
-    }
+body[data-bs-theme="dark"] {
+    background-color: #000000 !important;
+}
 
-    body[data-bs-theme="dark"] {
-        background-color: #000000 !important;
-    }
+.section-title {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-variation-settings: "wght" 900;
+    color: #DF6B50;
+    margin-bottom: 0.25rem;
+}
 
-    
+.section-subtitle {
+    font-size: clamp(1rem, 1.2vw, 1.4rem);
+    opacity: 0.9;
+}
+
+.picture-title {
+    font-size: clamp(1.2rem, 2vw, 2rem);
+    font-weight: 700;
+    margin-top: 0.5rem;
+}  
+
+.picture-date {
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    font-weight: 500;
+}
+
+.picture-explanation {
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
+    text-align: justify;
+}
