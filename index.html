@@ -64,7 +64,7 @@
         <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 pb-sm-5">
           <div class="container">
             <div class="row justify-content-center justify-content-md-end">
-              <div class="col-md-4 col-10 text-md-end text-center mb-md-5 pb-md-4">
+              <div class="col-md-4 col-10 text-md-end text-center mb-5 pb-md-4">
                 <div class="small d-block lh-sm text-light">
                   This webpage lets you explore NASA’s Astronomy Picture of the Day from the moment you were born.
                   You can also discover cosmic images from your birthday week.
@@ -96,6 +96,7 @@
             <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
               <img class="img-fluid object-fit-cover" alt="APOD Image" id="todayImage">
             </div>
+            <div class="small fst-italic mt-2 text-light opacity-75" id="todayCredit"></div>
           </div>
           <div class="col-12 col-lg-10 text-center mx-auto">
             <div class="d-flex flex-column h-100">
@@ -149,10 +150,12 @@
           <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
             <img class="img-fluid object-fit-cover" id="birthdayImage">
           </div>
+          <div class="small fst-italic mt-2 text-light opacity-75" id="birthdayCredit"></div>
         </div>
         <div class="col-10 text-center">
           <div class="d-flex flex-column h-100">
-            <div class="mb-1" style="font-size:clamp(1.2rem, 1.5vw, 1.5rem); font-variation-settings:'wght'700;"id="birthdayTitle">
+            <div class="mb-1" style="font-size:clamp(1.2rem, 1.5vw, 1.5rem); font-variation-settings:'wght'700;"
+              id="birthdayTitle">
             </div>
             <div class="fst-italic mb-3" style="font-size:clamp(1rem, 1.2vw, 1.4rem);" id="birthdayDate"></div>
             <div style="font-size:clamp(1rem, 1.2vw, 1.2rem); text-align:justify;" id="birthdayExplanation"></div>
@@ -182,6 +185,7 @@
     const todayImage = document.getElementById("todayImage");
     const todayTitle = document.getElementById("todayTitle");
     const todayDate = document.getElementById("todayDate");
+    const todayCredit = document.getElementById("todayCredit");
     const todayExplanation = document.getElementById("todayExplanation");
 
     const API_KEY = "UzVchurGpAqeUohMt6szX8XeS1DB0Q77qxZ3iu3A";
@@ -199,6 +203,11 @@
       if (data.media_type === "image") {
         todayImage.src = data.url;
       }
+
+      todayCredit.innerHTML = data.copyright
+        ? `Image Credit & Copyright: ${data.copyright}`
+        : "Image Credit: NASA / APOD";
+
     };
 
     loadTodayAPOD();
@@ -209,6 +218,9 @@
     const birthdayTitle = document.getElementById("birthdayTitle");
     const birthdayDate = document.getElementById("birthdayDate");
     const birthdayExplanation = document.getElementById("birthdayExplanation");
+
+    const birthdayCredit = document.getElementById("birthdayCredit");
+
     const birthdayResult = document.getElementById("birthdayResult");
     birthdayInput.min = "1995-06-16";
     const today = new Date().toISOString().split("T")[0];
@@ -232,6 +244,11 @@
       }
 
       birthdayResult.classList.remove("d-none");
+
+      birthdayCredit.innerHTML = data.copyright
+        ? `Image Credit & Copyright: ${data.copyright}`
+        : "Image Credit: NASA / APOD";
+
     };
 
   </script>
