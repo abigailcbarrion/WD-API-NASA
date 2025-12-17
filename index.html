@@ -28,7 +28,7 @@
           <div class="navbar-nav ms-auto text-end justify-content-end gap-3 w-100 px-3">
             <a class="nav-link active" aria-current="page" href="#">Home</a>
             <a class="nav-link " href="#APOD">APOD</a>
-            <a class="nav-link " href="#birthdaypicture">Birthday Picture</a>
+            <a class="nav-link " href="#birthdayInput">Birthday Picture</a>
             <a class="nav-link " href="#gallery">Gallery</a>
           </div>
         </div>
@@ -45,9 +45,9 @@
         <div class="position-absolute top-0 start-50 translate-middle-x w-100 pt-5">
           <div class="container">
             <div class="row">
-              <div class="col-md-8 col-12 text-md-start mt-3 mt-sm-5 ps-4">
+              <div class="col-12 col-md-8 text-md-start mt-3 mt-sm-5 ps-4">
                 <div class="display-2 fw-bold text-light"
-                  style="font-weight:900;letter-spacing:-0.04em;font-variation-settings:'wght' 900;text-shadow:0 4px 12px rgba(0, 0, 0, 0.6);">
+                  style="font-weight:900;letter-spacing:-0.04em; font-variation-settings:'wght' 900;text-shadow:0 4px 12px rgba(0, 0, 0, 0.6);">
                   YOUR BIRTHDAY
                   <span class="d-block" style="margin-top:-0.3em;">IN
                     <span style="color: black; text-shadow:0 4px 12px rgba(119, 119, 119, 0.6);">
@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-        <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 pb-5">
+        <div class="position-absolute bottom-0 start-50 translate-middle-x w-100 pb-sm-5">
           <div class="container">
             <div class="row justify-content-center justify-content-md-end">
               <div class="col-md-4 col-10 text-md-end text-center mb-md-5 pb-md-4">
@@ -76,25 +76,168 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid mt-auto py-3 text-dark" style="background-color: #D35C41;">
+
+  <div class="p-3">
+    <div class="container my-5 pt-5 text-center" id="APOD">
+      <div class="row justify-content-center">
+        <div class="col-10">
+          <div class="fw-bold"
+            style="font-size:clamp(1.8rem, 3vw, 3rem); font-variation-settings:'wght' 900; color: #DF6B50;">
+            Astronomy Picture of the Day
+          </div>
+          <div class="fst-italic mb-3" style="font-size:clamp(1rem, 1.2vw, 1.4rem);" id="todayDate">
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row px-lg-5 justify-content-center gy-4">
+          <div class="col-12  col-lg-8 text-center mx-auto">
+            <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+              <img class="img-fluid object-fit-cover" alt="APOD Image" id="todayImage">
+            </div>
+          </div>
+          <div class="col-12 col-lg-10 text-center mx-auto">
+            <div class="d-flex flex-column h-100">
+              <div class="mb-3" style="font-size:clamp(1.2rem,1.5vw,1.5rem); font-variation-settings:'wght' 700;"
+                id="todayTitle">
+              </div>
+              <div style="font-size:clamp(1rem, 1.2vw, 1.2rem); text-align:justify;" id="todayExplanation">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-3 px-sm-4 py-5">
+    <div class="container col-11 col-md-8 col-lg-6 mx-auto rounded-4 shadow-lg py-5"
+      style="background: linear-gradient(180deg, #945243 0%, #2E1915 100%);" id="birthday-form">
+      <div class="row justify-content-center">
+        <div class="col-11 col-md-10 text-center">
+          <div class="h2 fw-bold text-light mb-4">
+            Find Your Birthday in Space
+          </div>
+          <div class="text-start text-light small mb-2">
+            Select your birthday
+          </div>
+          <input type="date" class="form-control form-control-lg mb-4 rounded-3" id="birthdayInput">
+          <button onclick="getBirthdayAPOD()" class="btn btn-lg px-4 text-light fw-bold"
+            style=" font-size:clamp(1rem, 1.2vw, 1.2rem);background-color:#E5735A;">
+            Show my space photo!
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-none" id="birthdayResult">
+    <div class="container text-center mt-5" id="birthdaypicture">
+      <div class="row justify-content-center text-center">
+        <div class="col-10 py-4">
+          <div class="fw-bold"
+            style="font-size:clamp(1.8rem, 3vw, 3rem); font-variation-settings:'wght' 900; color: #DF6B50;">
+            Your Space Picture
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mb-5 pb-5">
+      <div class="row px-1 px-lg-5 justify-content-center gy-4">
+        <div class="col-10 col-lg-8 mb-4">
+          <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+            <img class="img-fluid object-fit-cover" id="birthdayImage">
+          </div>
+        </div>
+        <div class="col-10 text-center">
+          <div class="d-flex flex-column h-100">
+            <div class="mb-1" style="font-size:clamp(1.2rem, 1.5vw, 1.5rem); font-variation-settings:'wght'700;"id="birthdayTitle">
+            </div>
+            <div class="fst-italic mb-3" style="font-size:clamp(1rem, 1.2vw, 1.4rem);" id="birthdayDate"></div>
+            <div style="font-size:clamp(1rem, 1.2vw, 1.2rem); text-align:justify;" id="birthdayExplanation"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container-fluid mt-5 py-4 text-dark" style="background-color: #DF6B50;">
     <div class="container">
       <div class="row">
         <div class="col text-center text-light">
-          <div class="h6 fw-bold mb-1">Your Birthday in Space: A NASA APOD Viewer</div>
+          <div class="h6 fw-bold mb-2">Your Birthday in Space: A NASA APOD Viewer</div>
           <div class="small">
-            Disclaimer: All images, videos, and information featured on this website are sourced from NASA via its
-            official APIs. This project does not claim ownership of any content; all rights remain with their respective
-            owners.
+            Disclaimer: All images, videos, and information featured on this website are sourced from NASA via
+            its official APOD API. All rights remain with their respective owners.
             </small>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
+  <script>
+    const todayImage = document.getElementById("todayImage");
+    const todayTitle = document.getElementById("todayTitle");
+    const todayDate = document.getElementById("todayDate");
+    const todayExplanation = document.getElementById("todayExplanation");
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"></script>
+    const API_KEY = "UzVchurGpAqeUohMt6szX8XeS1DB0Q77qxZ3iu3A";
+
+    const loadTodayAPOD = async () => {
+      const response = await fetch(
+        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY
+      );
+      const data = await response.json();
+
+      todayTitle.innerHTML = data.title;
+      todayDate.innerHTML = data.date;
+      todayExplanation.innerHTML = data.explanation;
+
+      if (data.media_type === "image") {
+        todayImage.src = data.url;
+      }
+    };
+
+    loadTodayAPOD();
+  </script>
+  <script>
+    const birthdayInput = document.getElementById("birthdayInput");
+    const birthdayImage = document.getElementById("birthdayImage");
+    const birthdayTitle = document.getElementById("birthdayTitle");
+    const birthdayDate = document.getElementById("birthdayDate");
+    const birthdayExplanation = document.getElementById("birthdayExplanation");
+    const birthdayResult = document.getElementById("birthdayResult");
+    birthdayInput.min = "1995-06-16";
+    const today = new Date().toISOString().split("T")[0];
+    birthdayInput.max = today;
+
+    const getBirthdayAPOD = async () => {
+      if (!birthdayInput.value) return;
+
+      const response = await fetch(
+        "https://api.nasa.gov/planetary/apod?api_key=" + API_KEY + "&date=" + birthdayInput.value
+      );
+
+      const data = await response.json();
+
+      birthdayTitle.innerHTML = data.title;
+      birthdayDate.innerHTML = data.date;
+      birthdayExplanation.innerHTML = data.explanation;
+
+      if (data.media_type === "image") {
+        birthdayImage.src = data.url;
+      }
+
+      birthdayResult.classList.remove("d-none");
+    };
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
