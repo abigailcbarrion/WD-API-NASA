@@ -217,13 +217,15 @@
     const birthdayTitle = document.getElementById("birthdayTitle");
     const birthdayDate = document.getElementById("birthdayDate");
     const birthdayExplanation = document.getElementById("birthdayExplanation");
-
     const birthdayCredit = document.getElementById("birthdayCredit");
-
     const birthdayResult = document.getElementById("birthdayResult");
-    birthdayInput.min = "1995-06-16";
-    const today = new Date().toISOString().split("T")[0];
-    birthdayInput.max = today;
+
+    const MIN_DATE = "1995-06-16";
+    const MAX_DATE = new Date().toISOString().split("T")[0];
+
+    birthdayInput.min = MIN_DATE;
+    birthdayInput.max = MAX_DATE;
+
 
     const getBirthdayAPOD = async () => {
       const selectedDate = birthdayInput.value;
