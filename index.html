@@ -34,6 +34,7 @@
       </div>
     </nav>
   </div>
+
   <div class="container-fluid p-0 position-relative">
     <div class="row m-0">
       <div class="col p-0">
@@ -76,36 +77,25 @@
     </div>
   </div>
 
-  <div class="p-3">
-    <div class="container my-5 pt-5 text-center" id="APOD">
-      <div class="row justify-content-center">
-        <div class="col-10">
-          <div class="fw-bold section-title">
-            Astronomy Picture of the Day
-          </div>
-          <div class="fst-italic section-subtitle mb-3" id="todayDate">
-          </div>
+  <div class="container my-5 pt-5 text-center" id="APOD">
+    <div class="row justify-content-center mb-4">
+      <div class="col-10">
+        <div class="fw-bold section-title">
+          Astronomy Picture of the Day
         </div>
+        <div class="fst-italic section-subtitle" id="todayDate"></div>
       </div>
-
-      <div class="container">
-        <div class="row px-lg-5 justify-content-center gy-4">
-          <div class="col-12  col-lg-8 text-center mx-auto">
-            <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
-              <img class="img-fluid object-fit-cover" alt="APOD Image" id="todayImage">
-            </div>
-            <div class="small fst-italic mt-2 text-light opacity-75" id="todayCredit"></div>
-          </div>
-          <div class="col-12 col-lg-10 text-center mx-auto">
-            <div class="d-flex flex-column h-100">
-              <div class="mb-3 picture-title"
-                id="todayTitle">
-              </div>
-              <div class="picture-explanation" id="todayExplanation">
-              </div>
-            </div>
-          </div>
+    </div>
+    <div class="row justify-content-center gy-4 px-lg-5">
+      <div class="col-10 col-lg-8">
+        <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+          <img class="img-fluid object-fit-cover" id="todayImage">
         </div>
+        <div class="small fst-italic mt-2 opacity-75" id="todayCredit"></div>
+      </div>
+      <div class="col-10 col-lg-10">
+        <div class="picture-title mb-3" id="todayTitle"></div>
+        <div class="picture-explanation" id="todayExplanation"></div>
       </div>
     </div>
   </div>
@@ -132,48 +122,41 @@
     </div>
   </div>
 
-  <div class="d-none" id="birthdayResult">
-    <div class="container text-center mt-5">
-      <div class="row justify-content-center text-center">
-        <div class="col-10 py-4">
-          <div class="fw-bold section-title">
-            Your Space Picture
-          </div>
+  <div class="container my-5 d-none" id="birthdayResult">
+    <div class="row justify-content-center mb-4">
+      <div class="col-10 text-center">
+        <div class="fw-bold section-title">
+          Your Space Picture
         </div>
       </div>
     </div>
-    <div class="container mb-5 pb-5">
-      <div class="row px-1 px-lg-5 justify-content-center gy-4">
-        <div class="col-10 col-lg-8 mb-4">
-          <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
-            <img class="img-fluid object-fit-cover" id="birthdayImage">
-          </div>
-          <div class="small fst-italic mt-2 text-light opacity-75" id="birthdayCredit"></div>
+    <div class="row justify-content-center gy-4 px-lg-5">
+      <div class="col-10 col-lg-8">
+        <div class="ratio ratio-16x9 rounded-4 shadow-lg overflow-hidden">
+          <img class="img-fluid object-fit-cover" id="birthdayImage">
         </div>
-        <div class="col-10 text-center">
-          <div class="d-flex flex-column h-100">
-            <div class="mb-1 picture-title" id="birthdayTitle">
-            </div>
-            <div class="fst-italic picture-date mb-3" id="birthdayDate"></div>
-            <div class="picture-explanation" id="birthdayExplanation"></div>
-          </div>
-        </div>
+        <div class="small fst-italic mt-2 opacity-75" id="birthdayCredit"></div>
+      </div>
+      <div class="col-10 text-center">
+        <div class="picture-title mb-1" id="birthdayTitle"></div>
+        <div class="fst-italic picture-date mb-3" id="birthdayDate"></div>
+        <div class="picture-explanation" id="birthdayExplanation"></div>
       </div>
     </div>
   </div>
 
-  <div class="container my-4 d-none" id="gallery">
-    <div class="row px-1 px-lg-5 justify-content-center mb-3">
+  <div class="container my-5 d-none" id="gallery">
+    <div class="row justify-content-center mb-4">
       <div class="col-10">
         <div class="fw-bold section-title">
           Your Birth week Gallery
         </div>
-        <div class="section-subtitle mb-3">
+        <div class="section-subtitle">
           View other space photographs captured by NASA during the week of your birthday.
         </div>
       </div>
     </div>
-    <div class="row justify-content-center" id="birthWeekGallery"></div>
+    <div class="row justify-content-center px-lg-5" id="birthWeekGallery"></div>
   </div>
 
   <div class="container-fluid mt-5 py-4 text-dark" style="background-color: #DF6B50;">
@@ -249,7 +232,7 @@
       birthdayMessage.innerText = "";
       if (!selectedDate) return;
 
-     if (selectedDateStr < MIN_DATE || selectedDateStr > MAX_DATE) {
+      if (selectedDateStr < MIN_DATE || selectedDateStr > MAX_DATE) {
         birthdayMessage.classList.remove("d-none");
         birthdayMessage.innerText =
           "Please select a valid date between June 16, 1995 and today...";
