@@ -124,6 +124,7 @@
             Select your birthday
           </div>
           <input type="date" class="form-control form-control-lg mb-4 rounded-3" id="birthdayInput">
+          <div class="small text-warning mt-2 d-none" id="birthdayMessage"></div>
           <button onclick="getBirthdayAPOD()" class="btn btn-lg px-4 text-light fw-bold"
             style=" font-size:clamp(1rem, 1.2vw, 1.2rem);background-color:#E5735A;">
             Show my space photo!
@@ -219,6 +220,7 @@
     const birthdayExplanation = document.getElementById("birthdayExplanation");
     const birthdayCredit = document.getElementById("birthdayCredit");
     const birthdayResult = document.getElementById("birthdayResult");
+    const birthdayMessage = document.getElementById("birthdayMessage");
 
     const MIN_DATE = "1995-06-16";
     const MAX_DATE = new Date().toISOString().split("T")[0];
@@ -229,10 +231,14 @@
 
     const getBirthdayAPOD = async () => {
       const selectedDate = birthdayInput.value;
+      birthdayMessage.classList.add("d-none");
+      birthdayMessage.innerText = "";
       if (!selectedDate) return;
 
       if (selectedDate < MIN_DATE || selectedDate > MAX_DATE) {
-        alert("Please select a valid date between June 16, 1995 and today...");
+        birthdayMessage.classList.remove("d-none");
+        birthdayMessage.innerText =
+          "Please select a valid date between June 16, 1995 and today...";
         return;
       }
       const response = await fetch(
@@ -242,7 +248,9 @@
       const data = await response.json();
 
       if (data.code) {
-        alert("Sorry, there is no APOD available for this date...");
+        birthdayMessage.classList.remove("d-none");
+        birthdayMessage.innerText =
+          "Sorry, there is no APOD available for this date...";
         return;
       }
 
